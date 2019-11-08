@@ -66,6 +66,7 @@ public class Magpie3 {
 
 		// Refinement--make sure the goal isn't part of a
 		// word
+		int iteration = 1;
 		while (psn >= 0) {
 			// Find the string of length 1 before and after
 			// the word
@@ -78,6 +79,8 @@ public class Magpie3 {
 						psn + goal.length() + 1);
 			}
 
+			System.out.println("i:" + iteration + "  psn:" + psn + "  before:" + before + "  after: " + after);
+
 			// If before and after aren't letters, we've
 			// found the word
 			if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0)) // before
@@ -86,15 +89,17 @@ public class Magpie3 {
 																				// a
 																				// letter
 					&& ((after.compareTo("a") < 0) || (after.compareTo("z") > 0))) {
+				System.out.println("Found!");
 				return psn;
 			}
 
 			// The last position didn't work, so let's find
 			// the next, if there is one.
 			psn = phrase.indexOf(goal, psn + 1);
-
+			iteration++;
 		}
 
+		System.out.println("Not found!");
 		return -1;
 	}
 
