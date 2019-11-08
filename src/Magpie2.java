@@ -30,6 +30,7 @@ public class Magpie2 {
 	 * @return a response based on the rules given
 	 */
 	public String getResponse(String statement) {
+		// place higher priority responses higher on the list of responses
 		String response = "";
 		if (statement.trim().length() <= 0) {
 			response = "Say something, please";
