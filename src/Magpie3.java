@@ -27,6 +27,7 @@ public class Magpie3 {
 	 */
 	public String getResponse(String statement) {
 		String response = "";
+		String goal = "no"; // test goal for tracing
 		if (statement.length() == 0) {
 			response = "Say something, please.";
 		} else if (findKeyword(statement, "no") >= 0) {
@@ -34,8 +35,19 @@ public class Magpie3 {
 		} else if (findKeyword(statement, "mother") >= 0
 				|| findKeyword(statement, "father") >= 0
 				|| findKeyword(statement, "sister") >= 0
-				|| findKeyword(statement, "brother") >= 0) {
+				|| findKeyword(statement, "brother") >= 0
+				|| findKeyword(statement, goal) >= 0) {
 			response = "Tell me more about your family.";
+		} else if (findKeyword(statement, "dog") >= 0 || findKeyword(statement,"cat") >= 0) {
+			response = "Tell me more about your pets.";
+		} else if (findKeyword(statement, "Mr. Padjen") >= 0) {
+			response = "He sounds like a good teacher.";
+		} else if (findKeyword(statement,"how") >= 0) {
+			response = "Through a variety of tasks.";
+		} else if (findKeyword(statement,"what") >= 0) {
+			response = "I cannot identify that.";
+		} else if (findKeyword(statement,"when") >= 0) {
+			response = "Time is relative";
 		} else {
 			response = getRandomResponse();
 		}
@@ -67,7 +79,9 @@ public class Magpie3 {
 		// Refinement--make sure the goal isn't part of a
 		// word
 		int iteration = 1;
+		//System.out.println("Before while");
 		while (psn >= 0) {
+			
 			// Find the string of length 1 before and after
 			// the word
 			String before = " ", after = " ";
@@ -76,10 +90,10 @@ public class Magpie3 {
 			}
 			if (psn + goal.length() < phrase.length()) {
 				after = phrase.substring(psn + goal.length(),
-						psn + goal.length() + 1);
+				psn + goal.length() + 1);
 			}
-
-			System.out.println("i:" + iteration + "  psn:" + psn + "  before:" + before + "  after: " + after);
+			
+			System.out.println("i:" + iteration + "  psn:" + psn + "  before: |" + before +"| after: |" + after + "|");
 
 			// If before and after aren't letters, we've
 			// found the word
